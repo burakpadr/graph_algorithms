@@ -18,9 +18,5 @@ public class Test {
         File file = new File(file_path);
 
         DirectedGraph graph = new DirectedGraph(file);
-
-        Component component_finder = new Component(graph);
-
-        System.out.println(component_finder.getComponentSize());
     }
 }
