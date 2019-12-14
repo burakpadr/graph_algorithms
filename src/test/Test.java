@@ -1,7 +1,7 @@
 package test;
 
-import main.graph.Graph;
-import main.graph.Edge;
+import main.graph.Component;
+import main.graph.DirectedGraph;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,8 +17,10 @@ public class Test {
 
         File file = new File(file_path);
 
-        Graph graph = new Graph(file);
+        DirectedGraph graph = new DirectedGraph(file);
 
+        Component component_finder = new Component(graph);
 
+        System.out.println(component_finder.getComponentSize());
     }
 }

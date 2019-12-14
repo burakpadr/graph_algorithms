@@ -1,4 +1,4 @@
-package collections;
+package main.collections;
 
 
 import java.util.Iterator;
@@ -88,6 +88,18 @@ public class Dictionary<Key, Value> {
             index = (index + 1) % keys.length;
 
         values[index] = value;
+    }
+
+    public Dictionary<Value, Key> reversed(){
+        Dictionary<Value, Key> reversed = new Dictionary<>();
+
+        Iterator<Key> keys = keys();
+        Iterator<Value> values = values();
+
+        while (keys.hasNext())
+            reversed.put(values.next(), keys.next());
+
+        return reversed;
     }
 
     public boolean contains(Key key){

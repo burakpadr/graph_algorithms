@@ -1,25 +1,24 @@
 package main.graph;
 
-import collections.Dictionary;
-import collections.List;
-import main.graph.Edge;
+import main.collections.Dictionary;
+import main.collections.List;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Iterator;
 import java.util.Scanner;
 
-public class Graph {
+public class DirectedGraph {
 
     private Dictionary<Integer, List<Edge>> neighbors;
     private int edge_size;
 
 
-    public Graph(){
+    public DirectedGraph(){
         neighbors = new Dictionary<>();
     }
 
-    public Graph(File file) throws FileNotFoundException {
+    public DirectedGraph(File file) throws FileNotFoundException {
         neighbors = new Dictionary<>();
 
         Scanner file_scanner = new Scanner(file);
@@ -65,7 +64,23 @@ public class Graph {
         }
     }
 
+    public DirectedGraph reverse(){
+        DirectedGraph reverse = new DirectedGraph();
 
+        Iterator<Integer> nodes = nodes();
+
+        while (nodes.hasNext()){
+            Iterator<Edge> neighbors = neighbors(nodes.next());
+
+            while (neighbors.hasNext()) {
+                Edge neighbor = neighbors.next();
+
+                reverse.addEdge(new Edge(neighbor.toHere(), neighbor.fromHere(), neighbor.weight()));
+            }
+        }
+
+        return reverse;
+    }
 
     public int getNodeSize(){
         return neighbors.getSize();
@@ -80,6 +95,9 @@ public class Graph {
     }
 
     public Iterator<Edge> neighbors(int node){
+        if (!neighbors.contains(node))
+            return new List<Edge>().iterator();
+
         return neighbors.get(node).iterator();
     }
 }
