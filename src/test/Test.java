@@ -1,6 +1,5 @@
 package test;
 
-import main.graph.Component;
 import main.graph.DirectedGraph;
 
 import java.io.File;
